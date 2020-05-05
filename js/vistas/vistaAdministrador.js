@@ -25,7 +25,7 @@ VistaAdministrador.prototype = {
 
   construirElementoPregunta: function(pregunta){
     var contexto = this;
-    var nuevoItem;
+    var nuevoItem = $('<li/>', { 'id': pregunta.id, 'class': 'list-group-item' }).text(pregunta.texto);
     //completar
     //asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta"
     
@@ -36,8 +36,7 @@ VistaAdministrador.prototype = {
       return " " + resp.textoRespuesta;
     }));
     
-    nuevoItem.html($('.d-flex').html(`<li>${pregunta.textoPregunta}</li>`)).attr("id", pregunta.id).addClass("list-group-item");
-
+    nuevoItem.html($('.d-flex').html());
     return nuevoItem;
   },
 
