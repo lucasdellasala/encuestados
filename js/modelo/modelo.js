@@ -7,6 +7,7 @@ var Modelo = function() {
 
   //inicializacion de eventos
   this.preguntaAgregada = new Evento(this);
+  this.preguntaBorrada = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -22,6 +23,18 @@ Modelo.prototype = {
     this.preguntas.push(nuevaPregunta);
     this.guardar();
     this.preguntaAgregada.notificar();
+  },
+
+  //se borra una pregunta con su id
+  borrarPregunta: function(id) {
+    //Averiguar por qué me devuelve id NaN, qué significa, y por qué no estoy pudiendo borrar la pregunta con .splice()
+    //Id es NaN porque le estoy asignando mal el id x algun motivo a cada pregunta que creo
+    //Parece que es porque obtenerUltimoId no existe.
+    console.log(id);
+    this.preguntas.splice(id,1);
+    this.guardar();
+    this.preguntaBorrada.notificar();
+    console.log(id);
   },
 
   //se guardan las preguntas
