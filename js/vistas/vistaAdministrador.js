@@ -60,11 +60,18 @@ VistaAdministrador.prototype = {
 
       $('[name="option[]"]').each(function() {
         //completar
+        respuesta = $(this).val();
+        respuestas.push(respuesta);
+        console.log(respuesta);
       })
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
     //asociar el resto de los botones a eventos
+    e.botonBorrarPregunta.click(function(){
+      var id = parseInt($('.list-group-item.active').attr('id'));
+      contexto.controlador.borrarPregunta(id);
+    })
   },
 
   limpiarFormulario: function(){
