@@ -42,7 +42,12 @@ Modelo.prototype = {
   },
   
   agregarVoto: function (nombrePregunta,respuestaSeleccionada) {
-    //this.preguntas.splice((this.preguntas.id === id), 1);
+    //busco el elemento pregunta seleccionado
+    var elementoPregunta = this.preguntas.find(x=> x.textoPregunta == nombrePregunta);
+    //busco el elemento respueta seleccionada
+    var elementoRespuesta = elementoPregunta.cantidadPorRespuesta.find(y=> y.texto == respuestaSeleccionada);
+    //le sumo un voto
+    elementoRespuesta.votos++;
   },
   
   editarPregunta: function () {
