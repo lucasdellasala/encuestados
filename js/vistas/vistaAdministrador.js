@@ -11,6 +11,9 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
   });
+  this.modelo.preguntaEliminada.suscribir(function() {
+    contexto.reconstruirLista();
+  });
 };
 
 
@@ -62,7 +65,6 @@ VistaAdministrador.prototype = {
         //completar
         respuesta = $(this).val();
         respuestas.push(respuesta);
-        console.log(respuesta);
       })
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
@@ -76,5 +78,25 @@ VistaAdministrador.prototype = {
 
   limpiarFormulario: function(){
     $('.form-group.answer.has-feedback.has-success').remove();
-  },
+  }
+
+  // agregarPregunta: function () {
+
+  // },
+
+  // eliminarPregunta: function () {
+
+  // },
+  
+  // sumarVotoRespuesta: function () {
+
+  // },
+  
+  // editarPregunta: function () {
+
+  // },
+
+  // borrarTodasPreguntas: function () {
+
+  // },
 };
