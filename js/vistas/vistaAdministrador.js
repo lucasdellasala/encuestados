@@ -36,9 +36,9 @@ VistaAdministrador.prototype = {
     var titulo = interiorItem.find('h5');
     titulo.text(pregunta.textoPregunta);
     interiorItem.find('small').text(pregunta.cantidadPorRespuesta.map(function(resp){
-      return " " + resp.textoRespuesta;
+      console.log(" " + resp.texto);
+      return " " + resp.texto;
     }));
-    
     nuevoItem.html($('.d-flex').html());
     return nuevoItem;
   },
@@ -60,12 +60,17 @@ VistaAdministrador.prototype = {
     e.botonAgregarPregunta.click(function() {
       var value = e.pregunta.val();
       var respuestas = [];
-
-      $('[name="option[]"]').each(function() {
+      var elementoRespuesta = $('[name="option[]"]');      
+      elementoRespuesta.splice(-1, 1);
+      elementoRespuesta.each(function() {
         //completar
-        respuesta = $(this).val();
+        var respuesta = {
+          texto: $(this).val(),
+          votos: 0,
+        }
         respuestas.push(respuesta);
       })
+      console.log(respuestas);
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
@@ -80,23 +85,4 @@ VistaAdministrador.prototype = {
     $('.form-group.answer.has-feedback.has-success').remove();
   }
 
-  // agregarPregunta: function () {
-
-  // },
-
-  // eliminarPregunta: function () {
-
-  // },
-  
-  // sumarVotoRespuesta: function () {
-
-  // },
-  
-  // editarPregunta: function () {
-
-  // },
-
-  // borrarTodasPreguntas: function () {
-
-  // },
 };

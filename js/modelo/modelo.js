@@ -38,5 +38,18 @@ Modelo.prototype = {
 
   //se guardan las preguntas
   guardar: function(){
+    //localstorage
+  },
+  
+  agregarVoto: function (nombrePregunta,respuestaSeleccionada) {
+    //this.preguntas.splice((this.preguntas.id === id), 1);
+  },
+  
+  editarPregunta: function () {
+
+  },
+
+  borrarTodasPreguntas: function () {
+
   },
 };
