@@ -8,6 +8,8 @@ var Modelo = function() {
   //inicializacion de eventos
   this.preguntaAgregada = new Evento(this);
   this.preguntaEliminada = new Evento(this);
+  this.respuestaVotada = new Evento(this);
+  this.preguntaEditada = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -38,7 +40,7 @@ Modelo.prototype = {
 
   //se guardan las preguntas
   guardar: function(){
-    //localstorage
+    //localstorage?
   },
   
   agregarVoto: function (nombrePregunta,respuestaSeleccionada) {
@@ -48,10 +50,17 @@ Modelo.prototype = {
     var elementoRespuesta = elementoPregunta.cantidadPorRespuesta.find(y=> y.texto == respuestaSeleccionada);
     //le sumo un voto
     elementoRespuesta.votos++;
+    //Notificación y salvado
+    this.guardar();
+    this.respuestaVotada.notificar();
   },
   
-  editarPregunta: function () {
-
+  editarPregunta: function (id, tituloPregunta) {
+    if (!isNaN(id)){
+      this.preguntas[id-1].textoPregunta = tituloPregunta;
+      this.guardar();
+      this.preguntaEditada.notificar();
+    } 
   },
 
   borrarTodasPreguntas: function () {

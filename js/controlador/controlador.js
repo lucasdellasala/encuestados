@@ -13,8 +13,9 @@ Controlador.prototype = {
     this.modelo.borrarPregunta(id);
   },
   agregarVoto: function(nombrePregunta,respuestaSeleccionada){
-    console.log(nombrePregunta);
-    console.log(respuestaSeleccionada);
     this.modelo.agregarVoto(nombrePregunta,respuestaSeleccionada);
+  },
+  editarPregunta: function(id, tituloPregunta) {
+    this.modelo.editarPregunta(id, tituloPregunta);
   }
 };
