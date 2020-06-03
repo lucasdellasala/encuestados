@@ -10,6 +10,7 @@ var Modelo = function() {
   this.preguntaEliminada = new Evento(this);
   this.respuestaVotada = new Evento(this);
   this.preguntaEditada = new Evento(this);
+  this.preguntasEliminadas = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -63,7 +64,9 @@ Modelo.prototype = {
     } 
   },
 
-  borrarTodasPreguntas: function () {
-
+  borrarTodo: function () {
+    this.preguntas = [];
+    this.guardar();
+    this.preguntasEliminadas.notificar();
   },
 };
