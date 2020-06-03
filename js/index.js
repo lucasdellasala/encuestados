@@ -18,3 +18,4 @@ var vistaUsuario = new VistaUsuario(modelo, new Controlador(modelo), {
   'graficosDeTorta' : $('#graficosDeTorta'),
 });
 vistaUsuario.inicializar();
+this.modelo.cargar();

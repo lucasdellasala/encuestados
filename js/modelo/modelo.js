@@ -41,7 +41,14 @@ Modelo.prototype = {
 
   //se guardan las preguntas
   guardar: function(){
-    //localstorage?
+    localStorage.setItem("Preguntas", JSON.stringify(this.preguntas));
+    
+  },
+
+  cargar: function(){
+    let stringPreguntas = localStorage.getItem("Preguntas");
+    this.preguntas = JSON.parse(stringPreguntas);
+    this.preguntaAgregada.notificar();
   },
   
   agregarVoto: function (nombrePregunta,respuestaSeleccionada) {
