@@ -22,7 +22,9 @@ Modelo.prototype = {
   //se agrega una pregunta dado un nombre y sus respuestas
   agregarPregunta: function(nombre, respuestas) {
     var id = this.obtenerUltimoId();
+    console.log("ultimo id:" + id);
     id++;
+    console.log("id actual: " + id);
     this.ultimoId = id;
     var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     this.preguntas.push(nuevaPregunta);
@@ -47,6 +49,9 @@ Modelo.prototype = {
 
   cargar: function(){
     let stringPreguntas = localStorage.getItem("Preguntas");
+    if (stringPreguntas === false){
+     return console.log("hey");
+    }
     this.preguntas = JSON.parse(stringPreguntas);
     this.preguntaAgregada.notificar();
   },

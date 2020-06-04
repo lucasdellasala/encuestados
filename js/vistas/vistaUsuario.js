@@ -19,9 +19,12 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   this.modelo.preguntaEditada.suscribir(function() {
     contexto.reconstruirLista();
     contexto.reconstruirGrafico();
-  })
+  });
   this.modelo.preguntasEliminadas.suscribir(function() {
     contexto.reconstruirLista();
+    contexto.reconstruirGrafico();
+  });
+  this.modelo.respuestaVotada.suscribir(function(){
     contexto.reconstruirGrafico();
   })
 };
@@ -49,10 +52,11 @@ VistaUsuario.prototype = {
       var listaParaGrafico = [[clave.textoPregunta, 'Cantidad']];
       var respuestas = clave.cantidadPorRespuesta;
       respuestas.forEach (function(elemento) {
-        listaParaGrafico.push([elemento.textoRespuesta,elemento.cantidad]);
+        listaParaGrafico.push([elemento.texto, elemento.votos]);
       });
       contexto.dibujarGrafico(clave.textoPregunta, listaParaGrafico);
     })
+    
   },
 
 
@@ -63,7 +67,9 @@ VistaUsuario.prototype = {
     var preguntas = this.modelo.preguntas;
     preguntas.forEach(function(clave){
       //completar
+      console.log(clave); 
       let nuevoItem = $('<div/>', { 'id': clave.id, 'value': clave.textoPregunta }).text(clave.textoPregunta);
+      
       listaPreguntas.append(nuevoItem);
       //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
       var respuestas = clave.cantidadPorRespuesta;
@@ -92,9 +98,10 @@ VistaUsuario.prototype = {
         var nombrePregunta = $(this).attr('value');
         var id = $(this).attr('id');
         var respuestaSeleccionada = $('input[name=' + id + ']:checked').val();
-        $('input[name=' + id + ']').prop('checked',false);
+        console.log(nombrePregunta);
+        console.log(respuestaSeleccionada);  
         contexto.controlador.agregarVoto(nombrePregunta,respuestaSeleccionada);
-      });
+    });
   },
 
   dibujarGrafico: function(nombre, respuestas){
@@ -125,7 +132,7 @@ VistaUsuario.prototype = {
       var chart = new google.visualization.PieChart(div);
       if(seVotoAlgunaVez){
         chart.draw(data, options);
-      }
-    }
+      } 
+    };
   },
 };

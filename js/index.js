@@ -18,4 +18,7 @@ var vistaUsuario = new VistaUsuario(modelo, new Controlador(modelo), {
   'graficosDeTorta' : $('#graficosDeTorta'),
 });
 vistaUsuario.inicializar();
-this.modelo.cargar();
+
+if (localStorage.getItem("Preguntas") !== null) {
+  this.modelo.cargar()
+};
