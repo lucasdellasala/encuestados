@@ -10,7 +10,20 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   //suscripcion a eventos del modelo
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
+    contexto.reconstruirGrafico();
   });
+  this.modelo.preguntaEliminada.suscribir(function() {
+    contexto.reconstruirLista();
+    contexto.reconstruirGrafico();
+  });
+  this.modelo.preguntaEditada.suscribir(function() {
+    contexto.reconstruirLista();
+    contexto.reconstruirGrafico();
+  })
+  this.modelo.preguntasEliminadas.suscribir(function() {
+    contexto.reconstruirLista();
+    contexto.reconstruirGrafico();
+  })
 };
 
 VistaUsuario.prototype = {
@@ -50,6 +63,8 @@ VistaUsuario.prototype = {
     var preguntas = this.modelo.preguntas;
     preguntas.forEach(function(clave){
       //completar
+      let nuevoItem = $('<div/>', { 'id': clave.id, 'value': clave.textoPregunta }).text(clave.textoPregunta);
+      listaPreguntas.append(nuevoItem);
       //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
       var respuestas = clave.cantidadPorRespuesta;
       contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
@@ -61,12 +76,12 @@ VistaUsuario.prototype = {
     respuestas.forEach (function(elemento) {
       listaPreguntas.append($('<input>', {
         type: 'radio',
-        value: elemento.textoRespuesta,
+        value: elemento.texto,
         name: clave.id,
       }));
       listaPreguntas.append($("<label>", {
-        for: elemento.textoRespuesta,
-        text: elemento.textoRespuesta
+        for: elemento.texto,
+        text: elemento.texto
       }));
     });
   },
